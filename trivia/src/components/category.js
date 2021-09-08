@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+export const Category = ({id}) => {
 
-export const CategoryList = () => {
-    const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
-
-    useEffect(() => {
-        axios.get(`https://opentdb.com/api_category.php`).then((response) => {
-            setCategories(response.data.trivia_categories)
-        });
-    }, []);
-    console.log(categories)
-    return (
-        <div className="categories">
-                {categories.map((category) => (
-                    <button onClick={() => (setSelectedCategory (category.id))} 
-                    key={category.id}>{category.name} 
-                    </button>
-                ))}
-        </div>
-    );
-};
+useEffect(() => {
+    console.log('it runs')
+    axios.get(`https://opentdb.com/api.php?amount=10&category=${id}`).then((response) => {
+        console.log(response)
+    });
+}, [id]);
+    return <p>hello {id}</p>
+}
