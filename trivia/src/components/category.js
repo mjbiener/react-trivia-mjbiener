@@ -15,7 +15,7 @@ export const Category = () => {
     console.log(categories)
     return (
         <div>
-            <ul class="categories">
+            <ul className="categories">
                 {categories.map((category) => (
                     <li
                         key={category[1]}>{category[0]}
