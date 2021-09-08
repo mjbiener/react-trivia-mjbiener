@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from './category'
+import { CategoryList } from './category'
 
 export const App = () => {
   return (
@@ -8,7 +8,7 @@ export const App = () => {
         Trivia Game
       </h1>
       <div>
-        <Category />
+        <CategoryList />
       </div>
     </div>
   )
