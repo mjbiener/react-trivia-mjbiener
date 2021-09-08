@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Category } from './Category'
 
 export const App = () => {
   return (
@@ -6,6 +7,9 @@ export const App = () => {
       <h1>
         Trivia Game
       </h1>
+      <div>
+        <Category />
+      </div>
     </div>
   )
 }
