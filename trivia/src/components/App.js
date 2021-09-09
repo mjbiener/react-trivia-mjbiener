@@ -1,5 +1,6 @@
 import React from 'react';
-import { CategoryList } from './CategoryList'
+import { CategoryList } from './CategoryList';
+
 
 export const App = () => {
   return (

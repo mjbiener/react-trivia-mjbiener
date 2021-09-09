@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Questions }  from './Questions'
 
 export const Category = ({id}) => {
-
+const [questions, setQuestions] = useState([])
+const [selectedQuestion, setSelectedQuestion] = useState([])
 useEffect(() => {
-    console.log('it runs')
-    axios.get(`https://opentdb.com/api.php?amount=10&category=${id}`).then((response) => {
-        console.log(response)
+
+    axios.get(`https://opentdb.com/api.php?amount=10&category=${id}`)
+    .then((response) => {
+        setQuestions(response.data.results)
+        console.log(questions)
     });
 }, [id]);
-    return <p>hello {id}</p>
+    console.log(questions)
+    return (
+        <div className="category">
+            <Questions questions={questions} />
+</div>
+);
 }
