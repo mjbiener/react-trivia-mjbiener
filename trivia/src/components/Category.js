@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Questions }  from './Questions'
+import he from 'he';
 
-export const Category = ({id}) => {
-const [questions, setQuestions] = useState([])
-const [selectedQuestion, setSelectedQuestion] = useState([])
-useEffect(() => {
+export const Category = ({category}) => {
+    const [ questions, setQuestions ] = useState(null)
+    console.log(category)
+    useEffect(() => {
+        
+            axios.get(
+                `https://opentdb.com/api.php?amount=10&category=${category}`
+            )
+            .then((response) => {
+                setQuestions(response.data.results.map((question, index) => {
+                    const answer = he.decode(question.correct_answer)
+                    const options = [...question.incorrect_answers.map( item => he.decode(item)), answer]
+                    return {
+                        id: `${index}`, 
+                        question: he.decode(question.question),
+                        answer: answer,
+                        options: options.sort(() => Math.random() - 0.5)
+                    }
+                }))
+            })
+        },[])
 
-    axios.get(`https://opentdb.com/api.php?amount=10&category=${id}`)
-    .then((response) => {
-        setQuestions(response.data.results)
-        console.log(questions)
-    });
-}, [id]);
-    console.log(questions)
+
+
+
     return (
+        <>
         <div className="category">
-            <Questions questions={questions} />
-</div>
+            {category.name}
+        </div>
+        <Questions questions={questions}/>
+        </>
+        
 );
 }
