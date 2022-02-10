@@ -12,7 +12,7 @@ export const Categories = ({ categories }) => {
             <div className="categories">
                 <h4>Select a Category:</h4>
                 {categories.map((category) => (
-                    <button onClick={() => (setCategory(category))}  className="btn btn-dark" key={category.id}>{category.name}</button>
+                    <button onClick={() => (setCategory(category.id))}  className="btn btn-dark" key={category.id}>{category.name}</button>
                 ))}
             </div>
             <Category category={category}/>

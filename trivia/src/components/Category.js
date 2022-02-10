@@ -4,15 +4,17 @@ import { Questions }  from './Questions'
 import he from 'he';
 
 export const Category = ({category}) => {
-    const [ questions, setQuestions ] = useState(null)
+    const [questions, setQuestions] = useState([])
     console.log(category)
+
     useEffect(() => {
         
             axios.get(
-                `https://opentdb.com/api.php?amount=10&category=${category}`
+                `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`
             )
             .then((response) => {
-                setQuestions(response.data.results.map((question, index) => {
+                setQuestions(response.data.results
+                    .map((question, index) => {
                     const answer = he.decode(question.correct_answer)
                     const options = [...question.incorrect_answers.map( item => he.decode(item)), answer]
                     return {
@@ -22,8 +24,12 @@ export const Category = ({category}) => {
                         options: options.sort(() => Math.random() - 0.5)
                     }
                 }))
+
+                // setQuestions(response.data.results)
+                console.log(questions)
+
             })
-        },[])
+        },[category])
 
 
 
@@ -32,6 +38,7 @@ export const Category = ({category}) => {
         <>
         <div className="category">
             {category.name}
+            
         </div>
         <Questions questions={questions}/>
         </>

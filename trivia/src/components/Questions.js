@@ -14,6 +14,7 @@ export const Questions = (questions) => {
             key={question.id}>{question.question} 
             </button>
         ))} */}
+        Question component
         </div>
     )
 }
